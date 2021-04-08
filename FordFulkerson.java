@@ -23,30 +23,113 @@ public class FordFulkerson {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        while(true){
+            System.out.println("1 -> to read the file and calculate the max flow \n" +
+                    "2 -> to remove a edge and calculate the max flow \n" +
+                    "3 -> to change the capacity of a edge and calculate the max flow \n" +
+                    "4 -> to add anew edge and calculate the max flow \n" +
+                    "5 -> to exit ");
+          int  option= sc.nextInt();
 
 
+          if(option==5){
+              break;
+          }
+          switch (option){
+
+              case 1:
+                  System.out.println("Enter the file name to calculate the max flow");
+                  sc.nextLine();
+                  String filename = sc.nextLine();
+                  System.out.println("------------------------------------------------");
+
+                  System.out.println("      Displaying the nodes and it's edges      ");
+                  System.out.println("------------------------------------------------");
+                  //read the file and printing the graph
+                  fileParser(filename);
+                  System.out.println("------------------------------------------------");
 
 
-                System.out.println("Enter the file name to calculate the max flow");
-                String filename = sc.nextLine();
-                System.out.println("------------------------------------------------");
-
-                System.out.println("      Displaying the nodes and it's edges      ");
-                System.out.println("------------------------------------------------");
-                //read the file and printing the graph
-                fileParser(filename);
-                System.out.println("------------------------------------------------");
-
-                //          fileParser2(filename);
 //                Stopwatch stopwatch=new Stopwatch();
-                System.out.println("         Calculating Max flow          ");
-                System.out.println("------------------------------------------------");
-                System.out.println("source - "+source);
-                System.out.println("sink - "+sink);
-                System.out.println("-----------------");
-                System.out.println("Max Flow : " + fordFulkerson(graph, source, sink));  //getting the max flow
-                System.out.println("------------------------------------------------");
+                  System.out.println("         Calculating Max flow          ");
+                  System.out.println("------------------------------------------------");
+                  System.out.println("source - "+source);
+                  System.out.println("sink - "+sink);
+                  System.out.println("-----------------");
+                  System.out.println("Max Flow : " + fordFulkerson(graph, source, sink));  //getting the max flow
+                  System.out.println("------------------------------------------------");
 //                System.out.println("timing in seconds :" + stopwatch.elapsedTime());
+                  break;
+              case 2:
+                  System.out.println("Enter the starting and ending of the edge to be removed :");
+                  System.out.println("start :");
+                  int start =sc.nextInt();
+                  System.out.println("end :");
+                  int end =sc.nextInt();
+                  System.out.println("removing the "+start+" -> "+end+" edge");
+                  removeEdge(start,end);
+                  System.out.println("         Calculating Max flow          ");
+                  System.out.println("------------------------------------------------");
+                  System.out.println("source - "+source);
+                  System.out.println("sink - "+sink);
+                  System.out.println("-----------------");
+                  System.out.println("Max Flow : " + fordFulkerson(graph, source, sink));  //getting the max flow
+                  System.out.println("------------------------------------------------");
+//                System.out.println("timing in seconds :" + stopwatch.elapsedTime());
+                  break;
+              case 3:
+                  System.out.println("Enter the staring and ending of the edge and the capacity to be changed ");
+                  System.out.println("start :");
+                  int i =sc.nextInt();
+                  System.out.println("end :");
+                  int j =sc.nextInt();
+                  System.out.println("capacity :");
+                  int c =sc.nextInt();
+                  System.out.println("changing  the capacity of "+i+" -> "+j+" edge to "+c);
+                  changeCapacity(i,j,c);
+                  System.out.println("         Calculating Max flow          ");
+                  System.out.println("------------------------------------------------");
+                  System.out.println("source - "+source);
+                  System.out.println("sink - "+sink);
+                  System.out.println("-----------------");
+                  System.out.println("Max Flow : " + fordFulkerson(graph, source, sink));  //getting the max flow
+                  System.out.println("------------------------------------------------");
+//                System.out.println("timing in seconds :" + stopwatch.elapsedTime());
+                  break;
+              case 4:
+                  System.out.println("Enter the starting , ending and the capacity  of the edge to be added:");
+                  System.out.println("start :");
+                  int s =sc.nextInt();
+                  System.out.println("end :");
+                  int t =sc.nextInt();
+                  System.out.println("capacity :");
+                  int e=sc.nextInt();
+                  System.out.println("adding the edge "+s+" -> "+t);
+                  addEdge(s,t,e);
+                  System.out.println("         Calculating Max flow          ");
+                  System.out.println("------------------------------------------------");
+                  System.out.println("source - "+source);
+                  System.out.println("sink - "+sink);
+                  System.out.println("-----------------");
+                  System.out.println("Max Flow : " + fordFulkerson(graph, source, sink));  //getting the max flow
+                  System.out.println("------------------------------------------------");
+//                System.out.println("timing in seconds :" + stopwatch.elapsedTime());
+
+                  break;
+              default:
+                  System.out.println("choose any option from above");
+
+
+
+
+          }
+        }
+
+
+
+
+
+
 
 
 
@@ -54,8 +137,10 @@ public class FordFulkerson {
 
 
 
+
+
 //    static void fileParser2(String filename){
-//        //read the intergers from a file
+//        //read the integer from a file
 //        //set up the initial database
 //        In in = new In(filename);
 //        int[] list = in.readAllInts();
@@ -77,6 +162,21 @@ public class FordFulkerson {
 //        graph.printGraph();
 //
 //    }
+
+
+    private static void removeEdge(int i,int j){
+        graph.removeEdge(i,j);
+
+    };
+
+    private static void addEdge(int i,int j,int capacity){
+        graph.addEdge(i,j,capacity);
+    }
+
+    private static void changeCapacity(int i,int j,int capacity){
+        graph.addEdge(i,j,capacity);
+    }
+
 
 
 
